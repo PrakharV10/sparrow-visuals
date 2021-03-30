@@ -1,0 +1,25 @@
+.search-page{
+    width: 100%;
+}
+
+.search-page .divider{
+    background-color: var(--pink-800);
+    height: 2px;
+    box-shadow: var(--pink-800) 30px 30px 90px;
+}
+
+.video-list{
+    padding: 2rem 6rem;
+}
+
+@media screen and (max-width : 768px){
+    .video-list{
+        padding: 2rem;
+    }
+}
+
+@media screen and (max-width : 426px){
+    .video-list{
+        padding: 1rem;
+    }
+}

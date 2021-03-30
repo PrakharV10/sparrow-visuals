@@ -1,10 +1,9 @@
 import React from 'react'
-import SearchBar from '../SearchBar/SearchBar'
 import './NavBar.css'
 
 function NavBar() {
     return (
-        <div className="nav-bar">
+        <nav className="nav-bar">
             <div className="logo">
                 DOVE
             </div>
@@ -21,7 +20,7 @@ function NavBar() {
                     </li>
                 </ul>
             </div>
-        </div>
+        </nav>
     )
 }
 

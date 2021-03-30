@@ -24,11 +24,10 @@ html{
 
 
 body{
-  font-family: 'Source Sans Pro', sans-serif;
-  font-family: 'Ubuntu', sans-serif;
-  /* font-family: 'Roboto', sans-serif; */
-  width: 100vw;
+  /* font-family: 'Source Sans Pro', sans-serif;
+  font-family: 'Ubuntu', sans-serif; */
+  font-family: 'Roboto', sans-serif;
+  width: 100%;
   min-height: 100vh;
   background-color: var(--gray-900);
 }
-

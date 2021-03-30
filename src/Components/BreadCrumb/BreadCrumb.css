@@ -1,0 +1,36 @@
+.bread-crumb{
+    padding: 2rem 6rem;
+    color: var(--gray-300);
+    font-weight: 300;
+    display: flex;
+    justify-content: space-between;
+    font-size: .9rem;
+    align-items: center;
+}
+
+.route-title{
+    font-size: 2rem;
+    color: var(--white-100);
+    font-weight: 500;
+}
+
+
+@media screen and (max-width : 768px){
+    .bread-crumb{
+        padding:2rem;
+    }
+
+    .route-title{
+        font-size: 1.5rem;
+    }
+  }
+  
+  @media screen and (max-width : 426px){
+    .bread-crumb{
+        padding: 1rem 1rem;
+    }
+
+    .route-title{
+        font-size: 1rem;
+    }
+  }
