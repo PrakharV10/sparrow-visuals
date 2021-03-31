@@ -1,11 +1,17 @@
 import React from 'react'
+import { useRoute } from '../../Context/Video-Context';
 import './VideoCard.css'
 
 function VideoCard() {
+
+    const { setRoute } = useRoute();
+
     return (
-        <div className="video-card">
+        <div
+            onClick = {() => setRoute("VideoPlay")}
+            className="video-card">
             <div className="video-thumbnail">
-                <img src="https://images.unsplash.com/photo-1610714872434-3efb46a5c258?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" alt="thumbnail" class="rsp-img" />
+                <img src="https://images.unsplash.com/photo-1610714872434-3efb46a5c258?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" alt="thumbnail" className="rsp-img" />
                 <div className="duration-tag">
                     2:09
                 </div>
