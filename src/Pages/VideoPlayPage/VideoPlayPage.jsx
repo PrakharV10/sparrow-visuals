@@ -1,29 +1,39 @@
 import React from 'react'
 import ReactPlayer from 'react-player'
+import {useLocation} from 'react-router-dom'
+
 import './VideoPlayPage.css'
 
 function VideoPlayPage() {
+
+    
+    const {state : {course}} = useLocation();
+    
     return (
         <div className="video-play">
-            <div className="player">
+            <div className="left-flex">
                 <ReactPlayer
                     width="100%"
                     height="100%"
                     controls
-                    url="https://www.youtube.com/watch?v=3jf_Z68c4LQ"
+                    url={`https://www.youtube.com/watch?v=${course.id}`}
                 />
+                <div className="video-details">
+                    <div className="name">
+                        {course.title}
+                    </div>
+                    <div className="channel">
+                        <img src={course.channelImage} alt="avatar" className="avatar sm" />
+                        {course.channelName}
+                    </div>
+                    <div className="caption">
+                        {course.description}
+                    </div>
+                </div>
             </div>
-            <div className="video-details">
-                <div className="name">
-                    My Hero Academia OST - Might+U
-                </div>
-                <div className="channel">
-                    <img src="https://www.refinery29.com/images/10267701.jpg" alt="avatar" className="avatar sm" />
-                    GroguMando
-                </div>
-                <div className="caption">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                </div>
+
+            <div className="right-flex">
+                
             </div>
         </div>
     )

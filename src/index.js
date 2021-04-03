@@ -1,13 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import { RouteProvider } from './Context/Video-Context';
+import { CoursePageProvider } from './Context/Video-Context';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 ReactDOM.render(
   <React.StrictMode>
-    <RouteProvider>
-      <App />
-    </RouteProvider>
+    <Router>
+      <CoursePageProvider>
+        <App />
+      </CoursePageProvider>
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );

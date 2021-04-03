@@ -1,0 +1,40 @@
+.course-section .card{
+    background-color: var(--gray-900);
+    text-align: center;
+    padding: 2rem;
+    cursor: pointer;
+    color : var(--gray-300);
+    width: 100%; 
+}
+
+.section-title{
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.grid-box{
+    margin: 3rem 0;
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    grid-auto-columns: minmax(min-content,max-content);
+    grid-auto-rows: minmax(min-content,max-content);
+    grid-gap : 2rem;
+}
+
+@media screen and (max-width : 1024px){
+    .grid-box{
+        grid-template-columns: repeat(3,1fr);
+    }
+}
+
+@media screen and (max-width: 768px){
+    .grid-box{
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+
+@media screen and (max-width: 426px){
+    .grid-box{
+        grid-template-columns: 1fr;
+    }
+}

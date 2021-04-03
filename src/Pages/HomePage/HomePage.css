@@ -1,0 +1,25 @@
+.home-page{
+    color: var(--white-100);
+    font-family: 'Ubuntu', sans-serif;
+    margin-top: 3rem ;
+}
+
+.wrapper{
+    padding: 2rem 6rem;
+}
+
+.divider{
+    background-color: rgb(92, 92, 92);
+}
+
+@media screen and (max-width: 768px){
+    .wrapper{
+        padding: 2rem;
+    }
+}
+
+@media screen and (max-width: 426px){
+    .wrapper{
+        padding: 1rem;
+    }
+}

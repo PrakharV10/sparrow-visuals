@@ -21,7 +21,7 @@ const RouteContext = createContext();
 export function RouteProvider({ children }) {
 
     const [route, setRoute] = useState("Search");
-    // Search, VideoPlay
+    // Search, VideoPlay, Playlist, Home, Courses
 
     return (
         <RouteContext.Provider value={{route, setRoute}}>
@@ -32,4 +32,23 @@ export function RouteProvider({ children }) {
 
 export function useRoute() {
     return useContext(RouteContext)
+}
+
+
+// Current Course Page
+const CoursePageContext = createContext();
+
+export function CoursePageProvider({ children }) {
+    
+    const [coursePage, setCoursePage] = useState([]);
+
+    return (
+        <CoursePageContext.Provider value={{ coursePage, setCoursePage }}>
+            {children}
+        </CoursePageContext.Provider>
+    )
+}
+
+export function useCoursePage() {
+    return useContext(CoursePageContext)
 }

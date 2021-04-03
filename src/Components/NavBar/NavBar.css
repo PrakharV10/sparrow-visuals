@@ -50,7 +50,11 @@
     align-items: center;
 }
 
-.right-nav ul li{
+li{
+    list-style: none;
+}
+
+.right-nav .mobile-hide{
     list-style: none;
     padding: 0 0 0 1rem;
     text-transform: uppercase;
@@ -61,7 +65,7 @@
     font-weight: 500;
 }
 
-.right-nav ul li:hover{
+.right-nav .mobile-hide:hover{
     color: var(--pink-800);
 }
 
