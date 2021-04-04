@@ -23,7 +23,7 @@ function App() {
           <Route path="/courses/:courseUrl" element={<CoursePage />} />
           <Route path="/watch" element={<VideoPlayPage />} />
         </Routes>
-        <SideBar showMenu={showMenu} />
+        <SideBar setShowMenu={setShowMenu} showMenu={showMenu} />
       </main>
     </div>
   );

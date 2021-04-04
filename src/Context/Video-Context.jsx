@@ -1,10 +1,14 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useReducer } from 'react';
+import { dispatchFunc, initialState } from '../Reducer/Video-Reducer';
 
 const VideoContext = createContext();
 
-export function VideoProvider({children}) {
+export function VideoProvider({ children }) {
+    
+    const [state, dispatch] = useReducer(dispatchFunc,initialState)
+
     return (
-        <VideoContext.Provider>
+        <VideoContext.Provider value={{ state, dispatch}}>
             {children}
         </VideoContext.Provider>
     )
@@ -12,43 +16,4 @@ export function VideoProvider({children}) {
 
 export function useVideo() {
     return useContext(VideoContext);
-}
-
-// Route Context
-
-const RouteContext = createContext();
-
-export function RouteProvider({ children }) {
-
-    const [route, setRoute] = useState("Search");
-    // Search, VideoPlay, Playlist, Home, Courses
-
-    return (
-        <RouteContext.Provider value={{route, setRoute}}>
-            {children}
-        </RouteContext.Provider>
-    )
-}
-
-export function useRoute() {
-    return useContext(RouteContext)
-}
-
-
-// Current Course Page
-const CoursePageContext = createContext();
-
-export function CoursePageProvider({ children }) {
-    
-    const [coursePage, setCoursePage] = useState([]);
-
-    return (
-        <CoursePageContext.Provider value={{ coursePage, setCoursePage }}>
-            {children}
-        </CoursePageContext.Provider>
-    )
-}
-
-export function useCoursePage() {
-    return useContext(CoursePageContext)
 }

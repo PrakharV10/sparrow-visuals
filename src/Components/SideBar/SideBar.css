@@ -24,8 +24,8 @@
     transform: translate(100%,0);
     transition: transform .3s ease;
 }
-
-.side-bar .nav-links li{
+.side-bar .nav-link{
+    display: block;
     text-transform: uppercase;
     list-style: none;
     font-weight: 300;

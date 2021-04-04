@@ -1,13 +1,13 @@
 import React from 'react'
 import './BreadCrumb.css'
 
-function BreadCrumb() {
+function BreadCrumb({courseName}) {
     return (
         <div className="bread-crumb">
             <div className="route-title">
-                Keyword
+                
             </div>
-            Home | Search
+            {courseName}
         </div>
     )
 }

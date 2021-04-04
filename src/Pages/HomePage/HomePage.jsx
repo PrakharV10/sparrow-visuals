@@ -1,14 +1,20 @@
 import React from 'react'
 import CourseSection from '../../Components/CourseSection/CourseSection'
-import {data,courseList} from '../../Data/Data.js'
+import LikeSection from '../../Components/LikeSection/LikeSection'
+import { useVideo } from '../../Context/Video-Context'
+import {courseList} from '../../Data/Data.js'
 import './HomePage.css'
 
 function HomePage() {
+
+    const { state } = useVideo();
+
     return (
         <div className="home-page wrapper">
             <CourseSection
-                data = {data}
                 courseList={courseList} />
+            <div className="divider"></div>
+            <LikeSection />
             <div className="divider"></div>
         </div>
     )

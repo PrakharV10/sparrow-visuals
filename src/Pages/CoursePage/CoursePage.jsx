@@ -14,7 +14,7 @@ function CoursePage() {
 
     return (
         <div className="course-page">
-            <BreadCrumb />
+            <BreadCrumb courseName = {current[0].category} />
             <div className="divider"></div>
             <div className="video-list">
                 {

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import './CourseSection.css'
 
-function CourseSection({ data,courseList }) {
+function CourseSection({courseList }) {
 
     return (
         <div className="course-section">

@@ -1,14 +1,16 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom';
+
 import './SideBar.css'
 
-function SideBar({showMenu}) {
+function SideBar({setShowMenu, showMenu}) {
     return (
         <div className={showMenu ? "side-bar-bg show" : "side-bar-bg"}>
             <div className={showMenu ? "side-bar view" : "side-bar"}>
                 <ul className="nav-links">
-                    <li>Home</li>
-                    <li>Explore</li>
-                    <li>Playlist</li>
+                    <NavLink to="/" className="nav-link" onClick = {() => setShowMenu(false)}>Home</NavLink>
+                    <NavLink to="/library" className="nav-link" onClick = {() => setShowMenu(false)}>Library</NavLink>
+                    <NavLink to="/account" className="nav-link" onClick = {() => setShowMenu(false)}>Account</NavLink>
                 </ul>
             </div>
         </div>
