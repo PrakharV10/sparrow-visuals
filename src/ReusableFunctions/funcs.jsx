@@ -13,3 +13,11 @@ export function searchMyNotes(state, payload) {
         return false
     }
 }
+
+export function searchMyPlaylist(state, playlistName) {
+    if (state.playlists.find((item) => item.name === playlistName )){
+        return true
+    } else {
+        return false
+    }
+}
