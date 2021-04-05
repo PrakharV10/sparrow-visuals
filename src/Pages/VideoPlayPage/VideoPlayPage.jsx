@@ -47,7 +47,10 @@ function VideoPlayPage() {
                             </button>
                             <button
                                 onClick = {() => setShowModal(true)}
-                                className="btn btn-trans">ADD TO PLAYLIST</button>
+                                className="btn btn-trans"
+                            >
+                                ADD TO PLAYLIST
+                            </button>
                             <PlaylistModal course={course} showModal={showModal} setShowModal={setShowModal} />
                         </div>
                     </div>

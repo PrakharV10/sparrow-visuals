@@ -14,10 +14,17 @@ export function searchMyNotes(state, payload) {
     }
 }
 
-export function searchMyPlaylist(state, playlistName) {
+export function searchPlaylistsForPlaylist(state, playlistName) {
     if (state.playlists.find((item) => item.name === playlistName )){
         return true
     } else {
         return false
     }
+}
+
+export function searchPlaylistsForID(itemID,videoID) {
+    if (itemID.filter(oneId => oneId === videoID).length === 0)
+        return false
+    else
+        return true
 }

@@ -1,10 +1,11 @@
-import { searchMyNotes, searchMyPlaylist } from "../ReusableFunctions/funcs";
+import { searchMyNotes } from "../ReusableFunctions/funcs";
 
 const ADD_TO_LIKES = "ADD_TO_LIKES";
 const REMOVE_FROM_LIKES = "REMOVE_FROM_LIKES";
 const ADD_NOTE = "ADD_NOTE";
 const ADD_NEW_PLAYLIST = "ADD_NEW_PLAYLIST";
 const ADD_TO_PLAYLIST = "ADD_TO_PLAYLIST";
+const REMOVE_FROM_PLAYLIST = "REMOVE_FROM_PLAYLIST";
 
 
 export function dispatchFunc(state , { type, payload }) {
@@ -27,21 +28,33 @@ export function dispatchFunc(state , { type, payload }) {
             } else {
                 return {...state, myNotes : [...state.myNotes, {id : payload.id, notes : [payload.input]}]}
             }
+            
         case ADD_NEW_PLAYLIST:
             return { ...state, playlists: [...state.playlists, { name : payload, id : [] }] }
         
         case ADD_TO_PLAYLIST:
-            if (searchMyPlaylist(state, payload.name)){
-                return {
-                    ...state, playlists: state.playlists.map((one) => {
-                        if (one.name === payload.name)
-                            return { ...one, id: [...one.id, payload.id] }
-                        return one
-                    })
-                }
-            } else {
-                return {...state, playlists : [...state.playlists, payload]}
+            return {...state, 
+                playlists: state.playlists.map((onePlaylist) => {
+                    if (onePlaylist.name === payload.name) {
+                        return { ...onePlaylist, id: [...onePlaylist.id, payload.id] }
+                    } else {
+                        return onePlaylist
+                    }
+                })
             }
+        
+        case REMOVE_FROM_PLAYLIST:
+            return {
+                ...state,
+                playlists: state.playlists.map((onePlaylist) => {
+                    if (onePlaylist.name === payload.name) {
+                        return {...onePlaylist, id: onePlaylist.id.filter(item => item !== payload.id)}
+                    } else {
+                        return onePlaylist
+                    }
+                })
+            }
+        
         default:
             return state;
     }
@@ -72,5 +85,9 @@ playlists: [
             id : ["..."]
         }
     ]
+
+    {
+        name : [" " " "]
+    }
 
 */

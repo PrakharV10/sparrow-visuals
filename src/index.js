@@ -6,11 +6,11 @@ import { VideoProvider } from './Context/Video-Context';
 
 ReactDOM.render(
   <React.StrictMode>
-    <VideoProvider >
-      <Router>
+    <Router>
+      <VideoProvider >
         <App />
-      </Router>
-    </VideoProvider>
+      </VideoProvider>
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );

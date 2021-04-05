@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useVideo } from '../../Context/Video-Context';
+import { searchPlaylistsForID } from '../../ReusableFunctions/funcs';
 import './PlaylistModal.css'
 
 function PlaylistModal({course, showModal, setShowModal }) {
@@ -16,9 +17,14 @@ function PlaylistModal({course, showModal, setShowModal }) {
     }
 
     function checkBoxHandler(item) {
-        dispatch({ type: "ADD_TO_PLAYLIST", payload: { name : item.name, id:course.id }})
+        if (searchPlaylistsForID(item.id, course.id) === true) {
+            console.log("...removing")
+            dispatch({type : "REMOVE_FROM_PLAYLIST", payload : {name : item.name , id : course.id}})
+        } else {
+            dispatch({ type: "ADD_TO_PLAYLIST", payload: { name : item.name, id:course.id }})
+        }
     }
-
+    
     return (
         <div
             onClick={() => setShowModal(false)}
@@ -40,7 +46,12 @@ function PlaylistModal({course, showModal, setShowModal }) {
                                     key = {index}
                                     className="checkbox">
                                     <label htmlFor="checkBox1">
-                                        <input onChange={() => checkBoxHandler(item)} type="checkbox" name="checkbox" id="checkBox1" />
+                                        <input
+                                            onChange={() => checkBoxHandler(item)} type="checkbox"
+                                            name="checkbox"
+                                            id="checkBox1"
+                                            checked = {searchPlaylistsForID(item.id, course.id)}
+                                        />
                                         {item.name}
                                     </label>
                                 </div>
