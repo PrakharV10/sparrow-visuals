@@ -7,6 +7,7 @@ import SideBar from './Components/SideBar/SideBar';
 import HomePage from './Pages/HomePage/HomePage';
 import CoursePage from './Pages/CoursePage/CoursePage';
 import VideoPlayPage from './Pages/VideoPlayPage/VideoPlayPage';
+import NotFoundPage from './Pages/404Page/404Page';
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
           <Route path="/library" element={<HomePage />} />
           <Route path="/courses/:courseUrl" element={<CoursePage />} />
           <Route path="/watch" element={<VideoPlayPage />} />
+          <Route path = "*" element={<NotFoundPage />} />
         </Routes>
         <SideBar setShowMenu={setShowMenu} showMenu={showMenu} />
       </main>
