@@ -1,21 +1,21 @@
 import React from 'react'
-import CourseSection from '../../Components/CourseSection/CourseSection'
-import LikeSection from '../../Components/LikeSection/LikeSection'
-import PlaylistSection from '../../Components/PlaylistSection/PlaylistSection'
-import {courseList} from '../../Data/Data.js'
+import { Link } from 'react-router-dom'
 import './HomePage.css'
 
 function HomePage() {
-
     return (
-        <div className="home-page wrapper">
-            <CourseSection
-                courseList={courseList} />
-            <div className="divider"></div>
-            <LikeSection />
-            <div className="divider"></div>
-            <PlaylistSection />
-            <div className="divider"></div>
+        <div className="home-page">
+            <div className="hero-section image-overlay">
+                <div className="hero-text">
+                    Step into the World of Graphic Designing, <br /> Where Everything is as Beautiful <br/> As you Imagine it to be.
+                </div>
+                <div className="hero-button">
+                    <button className="btn btn-simple-pink">SIGN IN</button>
+                    <Link to="/explore">
+                        <button className="btn btn-invert">EXPLORE</button>
+                    </Link>
+                </div>
+            </div>
         </div>
     )
 }

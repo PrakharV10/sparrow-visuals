@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import { useVideo } from '../../Context/Video-Context';
 import { searchPlaylistsForID } from '../../ReusableFunctions/funcs';
+import Toast from '../Toast/Toast';
 import './PlaylistModal.css'
 
 function PlaylistModal({course, showModal, setShowModal }) {
 
     const [modalInput, setModalInput] = useState("");
+    const [toast, setToast] = useState(false);
     const { state, dispatch } = useVideo();
     
     function addPlaylist(e) {
@@ -69,6 +71,7 @@ function PlaylistModal({course, showModal, setShowModal }) {
                     <button type="submit" >ADD</button>
                 </form>
             </div>
+            <Toast toast={toast} setToast={setToast} />
         </div>
     )
 }

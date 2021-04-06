@@ -1,14 +1,24 @@
 import React from 'react'
+import { useVideo } from '../../Context/Video-Context';
 import './SearchBar.css'
 
-function SearchBar() {
+function SearchBar({searchValue, setSearchValue}) {
+
+    const { dispatch } = useVideo();
+
+    function handleSubmit(e) {
+        e.preventDefault();        
+        dispatch({ type: "SEARCH_FILTER", payload: searchValue })
+    }
+
     return (
         <form
             className="search-bar"
-            // onSubmit={(e) => handleClick(e)}
+            onSubmit={(e) => handleSubmit(e)}
         >
             <input
-                // onChange = {(e) => setInput(e.target.value)}
+                value = {searchValue}
+                onChange = {(e) => setSearchValue(e.target.value)}
                 placeholder="Search Products Here" />
             <button
                 type = "submit">

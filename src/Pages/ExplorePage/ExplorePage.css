@@ -8,6 +8,22 @@
     margin: 2rem 0;
 }
 
+.search-show{
+    display: flex;
+    justify-content: flex-end;
+    color : var(--gray-300);
+}
+
+.search-show .clear-button{
+    font-size: .8rem;
+    cursor: pointer;
+    transition: color .3s ease;
+}
+
+.clear-button:hover{
+    color: var(--pink-800);
+}
+
 @media screen and (max-width : 700px){
     .search-container span{
         display: none;
