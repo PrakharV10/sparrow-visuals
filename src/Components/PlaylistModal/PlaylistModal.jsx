@@ -20,10 +20,17 @@ function PlaylistModal({course, showModal, setShowModal }) {
 
     function checkBoxHandler(item) {
         if (searchPlaylistsForID(item.id, course.id) === true) {
-            console.log("...removing")
-            dispatch({type : "REMOVE_FROM_PLAYLIST", payload : {name : item.name , id : course.id}})
+            dispatch({ type: "REMOVE_FROM_PLAYLIST", payload: { name: item.name, id: course.id } })
+            setToast({ action: "Remov", show: true })
+            setTimeout(() => {
+                setToast({action : "Remov", show : false})
+            },2000)
         } else {
-            dispatch({ type: "ADD_TO_PLAYLIST", payload: { name : item.name, id:course.id }})
+            dispatch({ type: "ADD_TO_PLAYLIST", payload: { name: item.name, id: course.id } })
+            setToast({ action: "Add", show: true })
+            setTimeout(() => {
+                setToast({action : "Add", show : false})
+            },2000)
         }
     }
     
