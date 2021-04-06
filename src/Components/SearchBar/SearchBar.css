@@ -2,7 +2,7 @@
     display: flex;
     align-items: center;
     background-color: var(--gray-900);
-    width: 300px;
+    width: 400px;
 }
 
 .search-bar button{
@@ -14,10 +14,11 @@
 
 .search-bar input{
     border : none;
-    padding : 1.5rem;
+    padding : 1.2rem;
     flex-grow: 1;
     outline: none;
     background-color: var(--gray-900);
+    color: var(--white-100);
 }
 
 .search-bar input::placeholder{
@@ -37,7 +38,7 @@
     fill : var(--pink-800);
 }
 
-@media screen and (max-width : 768px){
+@media screen and (max-width : 700px){
     .search-bar{
         width: 100%;
     }
