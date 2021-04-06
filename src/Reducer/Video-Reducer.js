@@ -6,6 +6,7 @@ const ADD_NOTE = "ADD_NOTE";
 const ADD_NEW_PLAYLIST = "ADD_NEW_PLAYLIST";
 const ADD_TO_PLAYLIST = "ADD_TO_PLAYLIST";
 const REMOVE_FROM_PLAYLIST = "REMOVE_FROM_PLAYLIST";
+const DELETE_PLAYLIST = "DELETE_PLAYLIST";
 
 
 export function dispatchFunc(state , { type, payload }) {
@@ -54,6 +55,9 @@ export function dispatchFunc(state , { type, payload }) {
                     }
                 })
             }
+        
+        case DELETE_PLAYLIST:
+            return {...state, playlists : state.playlists.filter(onePlaylist => onePlaylist.name !== payload.name)}
         
         default:
             return state;

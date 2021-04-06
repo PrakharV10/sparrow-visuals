@@ -45,11 +45,11 @@ function PlaylistModal({course, showModal, setShowModal }) {
                                 <div
                                     key = {index}
                                     className="checkbox">
-                                    <label htmlFor="checkBox1">
+                                    <label htmlFor={`checkBox${index}`}>
                                         <input
                                             onChange={() => checkBoxHandler(item)} type="checkbox"
                                             name="checkbox"
-                                            id="checkBox1"
+                                            id={`checkBox${index}`}
                                             checked = {searchPlaylistsForID(item.id, course.id)}
                                         />
                                         {item.name}
