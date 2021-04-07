@@ -19,7 +19,7 @@ function SearchBar({searchValue, setSearchValue}) {
             <input
                 value = {searchValue}
                 onChange = {(e) => setSearchValue(e.target.value)}
-                placeholder="Search Products Here" />
+                placeholder="Search Videos Here" />
             <button
                 type = "submit">
                 <svg
