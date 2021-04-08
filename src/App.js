@@ -10,10 +10,17 @@ import VideoPlayPage from './Pages/VideoPlayPage/VideoPlayPage';
 import NotFoundPage from './Pages/404Page/404Page';
 import ExplorePage from './Pages/ExplorePage/ExplorePage';
 import HomePage from './Pages/HomePage/HomePage.jsx';
+import LogInPage from './Pages/LoginPage/LogInPage';
+import SignupPage from './Pages/SignupPage/SignupPage';
+import PrivateRoute from './PrivateRoute';
+import { useAuth } from './Context/Video-Context';
 
 function App() {
 
   const [showMenu, setShowMenu] = useState(false);
+  const { state } = useAuth();
+
+  console.log(state)
 
   return (
     <div className="App">
@@ -22,11 +29,13 @@ function App() {
       <main>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/library" element={<LibraryPage />} />
+          <PrivateRoute path="/library" element={<LibraryPage />} />
           <Route path="/courses/:courseUrl" element={<CoursePage />} />
           <Route path="/watch" element={<VideoPlayPage />} />
           <Route path="/explore" element={<ExplorePage />} />
-          <Route path = "*" element={<NotFoundPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+          <Route path="/login" element={<LogInPage />} />
+          <Route path="/signup" element={<SignupPage />} />
         </Routes>
         <SideBar setShowMenu={setShowMenu} showMenu={showMenu} />
       </main>

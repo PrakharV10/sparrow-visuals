@@ -1,0 +1,78 @@
+.signin-bg{
+    width: 100%;
+    height: calc(100vh - 88px);
+    border-top: 5px solid var(--pink-800);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.signin-bg.image-overlay{
+    background-image: url('https://images.pexels.com/photos/414974/pexels-photo-414974.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'),  linear-gradient(rgba(0, 0, 0, 0.795),rgba(0, 0, 0, 0.842));
+}
+
+.mid-container{
+    background-color: var(--gray-900);
+    max-height:450px;
+    height: max-content;
+    width: 380px;
+    max-width: 90%;
+    border : 1px solid var(--gray-800);
+    box-shadow: 0 5px 25px 0 rgb(0 0 0 / 30%);
+    border-radius: 2px;
+    padding: 2rem 4rem;
+    text-align: center;
+}
+
+.mid-container .title{
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 500;
+    color: var(--gray-300);
+}
+
+.mid-container .title span{
+    color : var(--pink-800)
+}
+
+.user-field{
+    margin-top: 1.5rem;
+}
+
+.user-field input{
+    padding: .9rem;
+    background-color: var(--gray-800);
+    border: none;
+    border-radius: 2px;
+    color: var(--white-100);
+    margin: .5rem 0;
+    width: 100%;
+    outline: medium invert color;
+}
+
+.user-field input::placeholder{
+    font-weight: 500;
+    color: var(--gray-300);
+}
+
+.btn-outline-pink{
+    background-color: transparent;
+    width: 100%;
+    border: 2px solid var(--pink-800);
+    border-radius: 3px;
+    margin: 1.5rem 0;
+    font-weight: 400;
+}
+
+.mid-container .sub-text{
+    color: var(--white-100);
+    font-weight: 300;
+    font-size: .8rem;
+    margin: .5rem 0 1.5rem;
+}
+
+.text-pink{
+    color: var(--pink-800);
+    font-weight: 300;
+    font-size: .8rem;
+}

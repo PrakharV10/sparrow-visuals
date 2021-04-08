@@ -10,7 +10,9 @@ function HomePage() {
                     Step into the World of Graphic Designing, <br /> Where Everything is as Beautiful <br/> As you Imagine it to be.
                 </div>
                 <div className="hero-button">
-                    <button className="btn btn-simple-pink">SIGN IN</button>
+                    <Link to="/signup">
+                        <button className="btn btn-simple-pink">SIGN UP</button>
+                    </Link>
                     <Link to="/explore">
                         <button className="btn btn-invert">EXPLORE</button>
                     </Link>
