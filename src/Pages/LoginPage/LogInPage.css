@@ -1,4 +1,4 @@
-.signin-bg{
+.login-bg{
     width: 100%;
     height: calc(100vh - 88px);
     border-top: 5px solid var(--pink-800);
@@ -7,7 +7,7 @@
     align-items: center;
 }
 
-.signin-bg.image-overlay{
+.login-bg.image-overlay{
     background-image: url('https://images.pexels.com/photos/414974/pexels-photo-414974.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'),  linear-gradient(rgba(0, 0, 0, 0.795),rgba(0, 0, 0, 0.842));
 }
 

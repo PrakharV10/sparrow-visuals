@@ -28,3 +28,8 @@ export function searchPlaylistsForID(itemID,videoID) {
     else
         return true
 }
+
+export function returnUserID(state, user) {
+    return state.userLoginDetails.find(one => one.email === user.email && one.password === user.password).userId
+       
+}

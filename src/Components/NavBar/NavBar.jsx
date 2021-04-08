@@ -14,6 +14,8 @@ function NavBar({ showMenu, setShowMenu }) {
                     <NavLink to="/" className="mobile-hide">Home</NavLink>
                     <NavLink to="/explore" className="mobile-hide">Explore</NavLink>
                     <NavLink to="/library" className="mobile-hide">Library</NavLink>
+                    <NavLink to="/account" className="mobile-hide">Account</NavLink>
+
                     <li
                         onClick = {() => setShowMenu(!showMenu)}
                         className="mobile-show">

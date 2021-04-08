@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 import './App.css';
@@ -14,13 +14,21 @@ import LogInPage from './Pages/LoginPage/LogInPage';
 import SignupPage from './Pages/SignupPage/SignupPage';
 import PrivateRoute from './PrivateRoute';
 import { useAuth } from './Context/Video-Context';
+import AccountPage from './Pages/AccountPage/AccountPage';
 
 function App() {
 
   const [showMenu, setShowMenu] = useState(false);
-  const { state } = useAuth();
+  const { dispatch } = useAuth();
 
-  console.log(state)
+  useEffect(() => {
+
+    const memory = JSON.parse(localStorage.getItem("Login"))
+
+    if (memory?.isUserLoggedIn === true) {
+        dispatch({type : "LOGIN_ON_STARTUP", payload : memory})
+    }
+  },[])
 
   return (
     <div className="App">
@@ -36,6 +44,7 @@ function App() {
           <Route path="*" element={<NotFoundPage />} />
           <Route path="/login" element={<LogInPage />} />
           <Route path="/signup" element={<SignupPage />} />
+          <PrivateRoute path="/account" element={<AccountPage />} />
         </Routes>
         <SideBar setShowMenu={setShowMenu} showMenu={showMenu} />
       </main>

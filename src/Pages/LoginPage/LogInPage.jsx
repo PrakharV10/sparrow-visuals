@@ -20,11 +20,11 @@ function LogInPage() {
     }
 
     useEffect(() => {
-        isUserLoggedIn === true && navigate(state?.from ? state.from : "/")
-    },[])
+        isUserLoggedIn === true && navigate(state?.from ? state.from : "/explore")
+    },[isUserLoggedIn])
 
     return (
-        <div className="signin-bg image-overlay">
+        <div className="login-bg image-overlay">
             <div className="mid-container">
                 <div className="title">
                     LOG <span>IN</span>
