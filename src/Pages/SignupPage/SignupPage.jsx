@@ -45,21 +45,24 @@ function SignupPage() {
                         value={localInput.username}
                         placeholder="Username"
                         type="text"
-                        name="Username" />
+                        name="Username"
+                        required />
                     
                     <input
                         onChange={(e) => setLocalInput(localInput => ({ ...localInput, email: e.target.value }))}
                         value={localInput.email}
                         placeholder="Email"
                         type="text"
-                        name="email" />
+                        name="email"
+                        required />
                     
                     <input
                         onChange={(e) => passwordChecker(e)}
                         value={localInput.password}
                         placeholder="Password"
                         type="password"
-                        name="password" />
+                        name="password"
+                        required/>
                     
                     <div className="error-message">{errorMessage}</div>
                     
