@@ -27,11 +27,7 @@ function LikeSection() {
                         state.likedVideo.map((vid) => {
                             return (
                                 <Link
-                                    state={{ course: vid }}
-                                    to={{
-                                        pathname: "/watch",
-                                        search: `?v=${vid.id}`
-                                    }}
+                                    to = {`/watch/${vid.id}`}
                                     key={vid.id}>
                                     <Card current={vid} />
                                 </Link>

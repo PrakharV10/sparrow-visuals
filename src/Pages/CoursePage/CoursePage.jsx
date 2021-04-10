@@ -21,11 +21,7 @@ function CoursePage() {
                     current.map(course => {
                         return (
                             <Link
-                                state = {{course : course}}
-                                to={{
-                                pathname: "/watch",
-                                search: `?v=${course.id}`,
-                            }}
+                                to = {`/watch/${course.id}`}
                                 key={course.id}
                             >
                                 <VideoCard {...course}/>

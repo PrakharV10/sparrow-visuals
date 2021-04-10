@@ -50,11 +50,7 @@ function ExplorePage() {
                     filteredData.map((video) => {
                         return (
                             <Link
-                                state={{ course: video }}
-                                to={{
-                                    pathname: "/watch",
-                                    search: `?v=${video.id}`
-                                }}
+                                to = {`/watch/${video.id}`}
                                 key={video.id}>
                                 <Card current={video}/>
                             </Link>

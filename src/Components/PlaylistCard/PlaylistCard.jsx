@@ -11,11 +11,7 @@ function PlaylistCard({ current }) {
     return (
         <div>
             <Link
-                state={{ course: currVid }}
-            to={{
-                pathname: "/watch",
-                search: `?v=${currVid.id}`
-            }}
+            to = {`/watch/${currVid.id}`}
             key={currVid.id}
             className="cards">
                 <img className="card-image" src={currVid.thumbnail} alt="card-pic" />

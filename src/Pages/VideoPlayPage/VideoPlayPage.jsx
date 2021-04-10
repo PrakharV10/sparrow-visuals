@@ -1,18 +1,21 @@
 import React, { useState } from 'react'
 import ReactPlayer from 'react-player'
-import {useLocation} from 'react-router-dom'
+import {useParams} from 'react-router-dom'
 import NoteComponent from '../../Components/NoteComponent/NoteComponent';
 import PlaylistModal from '../../Components/PlaylistModal/PlaylistModal';
 import { useVideo } from '../../Context/Video-Context';
+import { data } from '../../Data/Data';
 import { searchLikes } from '../../ReusableFunctions/funcs';
 
 import './VideoPlayPage.css'
 
 function VideoPlayPage() {
 
-    const { state: { course } } = useLocation();
+    const { videoID } = useParams();
     const { state, dispatch } = useVideo();
     const [showModal, setShowModal] = useState(false);
+
+    const course = data.find((one) => one.id === videoID)
 
     function handleLikes() {
         if(searchLikes(state,course) === false){

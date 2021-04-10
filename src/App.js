@@ -39,7 +39,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <PrivateRoute path="/library" element={<LibraryPage />} />
           <Route path="/courses/:courseUrl" element={<CoursePage />} />
-          <Route path="/watch" element={<VideoPlayPage />} />
+          <Route path="/watch/:videoID" element={<VideoPlayPage />} />
           <Route path="/explore" element={<ExplorePage />} />
           <Route path="*" element={<NotFoundPage />} />
           <Route path="/login" element={<LogInPage />} />
