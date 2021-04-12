@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useReducer } from 'react';
+import React, { createContext, useContext, useReducer } from 'react';
 import { reducerFunc, initialAuthState } from '../Reducer/Auth-Reducer';
 import { dispatchFunc, initialState } from '../Reducer/Video-Reducer';
 

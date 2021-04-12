@@ -21,14 +21,13 @@ function App() {
   const [showMenu, setShowMenu] = useState(false);
   const { dispatch } = useAuth();
 
+
   useEffect(() => {
-
     const memory = JSON.parse(localStorage.getItem("Login"))
-
     if (memory?.isUserLoggedIn === true) {
-        dispatch({type : "LOGIN_ON_STARTUP", payload : memory})
+      dispatch({ type: "LOGIN_ON_STARTUP", payload: memory })
     }
-  },[])
+  }, [dispatch])
 
   return (
     <div className="App">
@@ -37,13 +36,13 @@ function App() {
       <main>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <PrivateRoute path="/library" element={<LibraryPage />} />
           <Route path="/courses/:courseUrl" element={<CoursePage />} />
           <Route path="/watch/:videoID" element={<VideoPlayPage />} />
           <Route path="/explore" element={<ExplorePage />} />
           <Route path="*" element={<NotFoundPage />} />
           <Route path="/login" element={<LogInPage />} />
           <Route path="/signup" element={<SignupPage />} />
+          <PrivateRoute path="/library" element={<LibraryPage />} />
           <PrivateRoute path="/account" element={<AccountPage />} />
         </Routes>
         <SideBar setShowMenu={setShowMenu} showMenu={showMenu} />

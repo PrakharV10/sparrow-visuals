@@ -1,26 +1,36 @@
+import axios from 'axios';
 import React, { useState } from 'react'
 import { useAuth } from '../../Context/Video-Context';
 
-function ChangePasswordBox() {
+function ChangePasswordBox({ currentState, setCurrentState }) {
     
-    const { state : {userLoginDetails , currentUserId}, dispatch } = useAuth();
+    const { state: { currentUserId } } = useAuth();
+    const [message, setMessage] = useState("");
 
-    const currentUser = userLoginDetails.find(one => one.userId === currentUserId)
-    const [currentState, setCurrentState] = useState({
-        oldPassword : "",
-        newPassword: "",
-        confirmPassword : ""
-    })
-
-    function submitHandler(e) {
-        e.preventDefault();
-        if (currentState.oldPassword === currentUser.password && currentState.newPassword === currentState.confirmPassword) {
-            dispatch({ type: "SAVE_NEW_PASSWORD", payload: currentState.newPassword })
+    async function serverPostPassword() {
+        const data = await axios.post(`https://Sparrow-Media-Authentication.prakhar10v.repl.co/users/${currentUserId}`, {
+            username: currentState.username,
+            email: currentState.email,
+            password : currentState.newPassword
+        })
+        if (data) {
+            setMessage(true)
             setCurrentState({
                 oldPassword: "",
                 newPassword: "",
                 confirmPassword : ""
             })
+        } else {
+            setMessage(false)            
+        }
+    }
+
+    function submitHandler(e) {
+        e.preventDefault();
+        if (currentState.oldPassword === currentState.actualPassword && currentState.newPassword === currentState.confirmPassword) {
+            serverPostPassword()
+        } else {
+            setMessage(false)
         }
     }
 
@@ -28,6 +38,8 @@ function ChangePasswordBox() {
         <form onSubmit={(e) => submitHandler(e)} className="profile-container">
             <div className="head">
                 Change Password
+                {message === true && <svg width="1em" height="1em" viewBox="0 0 15 15"><g fill="none"><path fillRule="evenodd" clipRule="evenodd" d="M0 7.5a7.5 7.5 0 1 1 15 0a7.5 7.5 0 0 1-15 0zm7.072 3.21l4.318-5.398l-.78-.624l-3.682 4.601L4.32 7.116l-.64.768l3.392 2.827z" fill="#15CD72"></path></g></svg>}
+                {message === false && <svg width="1em" height="1em" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93A10 10 0 0 1 2.93 17.07zM9 5v6h2V5H9zm0 8v2h2v-2H9z" fill="#ED4F32"></path></svg>}
             </div>
             <div className="upper-flex">
                 <div className="inp-group">

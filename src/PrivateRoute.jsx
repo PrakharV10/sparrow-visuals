@@ -5,7 +5,6 @@ import { useAuth } from './Context/Video-Context'
 function PrivateRoute({ path, ...props }) {
     
     const { state : {isUserLoggedIn} } = useAuth();
-
     return (
         isUserLoggedIn
             ?
