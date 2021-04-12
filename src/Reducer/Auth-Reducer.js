@@ -1,6 +1,3 @@
-import { userTable } from "../Data/UserTable";
-// import {returnUserID} from "../ReusableFunctions/funcs"
-
 const SAVE_SIGNUP_DETAILS = "SAVE_SIGNUP_DETAILS";
 const CHECK_LOGIN_DETAILS = "CHECK_LOGIN_DETAILS";
 const LOGIN_ON_STARTUP = "LOGIN_ON_STARTUP";
