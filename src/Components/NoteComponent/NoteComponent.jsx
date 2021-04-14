@@ -10,11 +10,11 @@ function NoteComponent({ course }) {
     const { state, dispatch } = useVideo();
     const [input, setInput] = useState("");
     const [loginModal, setLoginModal] = useState(false);
-    const { state: { iseUserLoggedIn } } = useAuth();
+    const { state: { isUserLoggedIn } } = useAuth();
     
     function submitHandler(e) {
         e.preventDefault();
-        if (iseUserLoggedIn) {
+        if (isUserLoggedIn) {
             if (input.trim().length === 0)
                 return
             dispatch({ type: "ADD_NOTE", payload: { input: input, id: course.id } })
