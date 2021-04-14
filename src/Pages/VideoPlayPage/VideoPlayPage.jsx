@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import ReactPlayer from 'react-player'
 import {useParams} from 'react-router-dom'
+import LoginModal from '../../Components/LoginModal/LoginModal';
 import NoteComponent from '../../Components/NoteComponent/NoteComponent';
 import PlaylistModal from '../../Components/PlaylistModal/PlaylistModal';
-import { useVideo } from '../../Context/Video-Context';
+import { useAuth, useVideo } from '../../Context/Video-Context';
 import { data } from '../../Data/Data';
 import { searchLikes } from '../../ReusableFunctions/funcs';
 
@@ -14,14 +15,28 @@ function VideoPlayPage() {
     const { videoID } = useParams();
     const { state, dispatch } = useVideo();
     const [showModal, setShowModal] = useState(false);
+    const [loginModal, setLoginModal] = useState(false)
+    const { state: { isUserLoggedIn } } = useAuth();
 
     const course = data.find((one) => one.id === videoID)
 
     function handleLikes() {
-        if(searchLikes(state,course) === false){
-            dispatch({type : "ADD_TO_LIKES", payload: course})
+        if (isUserLoggedIn === true) {
+            if(searchLikes(state,course) === false){
+                dispatch({type : "ADD_TO_LIKES", payload: course})
+            } else {
+                dispatch({type : "REMOVE_FROM_LIKES", payload : course})
+            }
         } else {
-            dispatch({type : "REMOVE_FROM_LIKES", payload : course})
+            setLoginModal(true)
+        }
+    }
+
+    function handlePlaylistButton() {
+        if (isUserLoggedIn === true) {
+            setShowModal(true)
+        } else {
+            setLoginModal(true)
         }
     }
 
@@ -49,13 +64,14 @@ function VideoPlayPage() {
                                 {searchLikes(state,course) ? "LIKED" : "LIKE"}
                             </button>
                             <button
-                                onClick = {() => setShowModal(true)}
+                                onClick = {handlePlaylistButton}
                                 className="btn btn-trans"
                             >
                                 ADD TO PLAYLIST
                             </button>
                             <PlaylistModal course={course} showModal={showModal} setShowModal={setShowModal} />
                         </div>
+                        <LoginModal loginModal={loginModal} setLoginModal={setLoginModal} />
                     </div>
                     <div className="channel">
                         <img

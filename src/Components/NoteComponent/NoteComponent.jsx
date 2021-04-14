@@ -1,19 +1,27 @@
 import React, { useState } from 'react'
-import { useVideo } from '../../Context/Video-Context';
+import { useAuth, useVideo } from '../../Context/Video-Context';
+import ReactMarkdown from 'react-markdown'
 
 import './NoteComponent.css'
+import LoginModal from '../LoginModal/LoginModal';
 
-function NoteComponent({course }) {
+function NoteComponent({ course }) {
 
     const { state, dispatch } = useVideo();
     const [input, setInput] = useState("");
+    const [loginModal, setLoginModal] = useState(false);
+    const { state: { iseUserLoggedIn } } = useAuth();
     
     function submitHandler(e) {
         e.preventDefault();
-        if (input.trim().length === 0)
-            return
-        dispatch({ type: "ADD_NOTE", payload: { input: input, id: course.id } })
-        setInput("")
+        if (iseUserLoggedIn) {
+            if (input.trim().length === 0)
+                return
+            dispatch({ type: "ADD_NOTE", payload: { input: input, id: course.id } })
+            setInput("")   
+        } else {
+            setLoginModal(true)
+        }
     }
 
     const currentNote =  state.myNotes.find(item => item.id === course.id)
@@ -24,13 +32,14 @@ function NoteComponent({course }) {
                 Take a Note!
             </div>
             {currentNote &&
+                
                 <div className="note-display">
                     {
                         currentNote.notes.map((note,index) => {
                             return (
                                 <div
                                     className= "one-note"
-                                    key={index}>{note}</div>
+                                    key={index}><ReactMarkdown source= {note} /></div>
                             )
                         })
                     }
@@ -42,10 +51,11 @@ function NoteComponent({course }) {
                     placeholder="Type here.."
                     type="text"
                     value={input}
-                    onChange = {(e) => setInput(e.target.value)}
+                    onChange={(e) => setInput(e.target.value)}
                 />
-                <button style={{display : "none"}} type="submit"></button>
-            </form>
+                <button style={{ display: "none" }} type="submit"></button>
+                <LoginModal loginModal = {loginModal} setLoginModal = {setLoginModal} />
+            </form> 
         </div>
     )
 }
