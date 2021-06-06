@@ -2,17 +2,21 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { AuthProvider, VideoProvider } from './Context/Video-Context';
+import { AuthProvider } from './Context/AuthContext';
+import { VideoProvider } from './Context/VideoContext';
+import { IsLoadingProvider } from './Context/IsLoadingContext';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Router>
-      <AuthProvider>
-        <VideoProvider >
-          <App />
-        </VideoProvider>
-      </AuthProvider> 
-    </Router>
-  </React.StrictMode>,
-  document.getElementById('root')
+	<React.StrictMode>
+		<Router>
+			<IsLoadingProvider>
+				<AuthProvider>
+					<VideoProvider>
+						<App />
+					</VideoProvider>
+				</AuthProvider>
+			</IsLoadingProvider>
+		</Router>
+	</React.StrictMode>,
+	document.getElementById('root')
 );

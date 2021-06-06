@@ -1,0 +1,9 @@
+export { default as PageNotFound } from './404/404Page';
+export { default as Account } from './Account/AccountPage';
+export { default as Course } from './Course/CoursePage';
+export { default as Explore } from './Explore/ExplorePage';
+export { default as Home } from './Home/HomePage';
+export { default as Library } from './Library/LibraryPage';
+export { default as LogIn } from './Login/LogInPage';
+export { default as Signup } from './Signup/SignupPage';
+export { default as VideoPlay } from './VideoPlayPage/VideoPlayPage';
