@@ -10,7 +10,7 @@ export function AuthProvider({ children }) {
 
 	function previousVersionUserCleanup() {
 		localStorage.removeItem('Login');
-		alert('This is Dove v2. Signup to continue.');
+		alert('Welcome to Dove v2. Signup to continue.');
 		navigate('/signup');
 	}
 
