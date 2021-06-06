@@ -3,7 +3,8 @@ import './SignupPage.css';
 
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../Context';
-import axios from 'axios';
+import { serverCallHandler } from '../../utils/serverCallFunction';
+import { SERVERURL } from '../../utils/api';
 
 function SignupPage() {
 	const { authDispatch } = useAuth();
@@ -29,24 +30,21 @@ function SignupPage() {
 	}
 
 	async function serverCheckAndSave() {
-		try {
-			let { data } = await axios.post(
-				'https://Sparrow-Media-Authentication.prakhar10v.repl.co/signup',
-				localInput
-			);
-			if (data.user) {
-				setErrorMessage('');
-				setLoading(false);
-				console.log(data);
-				authDispatch({ type: 'SAVE_SIGNUP_DETAILS', payload: data.user });
-				navigate('/explore');
-			} else {
-				setErrorMessage(data.message);
-				setLoading(false);
-			}
-		} catch (e) {
-			console.log(e);
-			setErrorMessage('Some Error Occured, Try Again');
+		const { response } = await serverCallHandler('POST', `${SERVERURL}/signup`, {
+			username: localInput.username,
+			password: localInput.password,
+			email: localInput.email,
+		});
+		if (response.success) {
+			setErrorMessage('');
+			setLoading(false);
+			authDispatch({
+				type: 'SAVE_SIGNUP_DETAILS',
+				payload: { user: response.data, token: response.token },
+			});
+			navigate('/explore');
+		} else {
+			setErrorMessage(response.message);
 			setLoading(false);
 		}
 	}

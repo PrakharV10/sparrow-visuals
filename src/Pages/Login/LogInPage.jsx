@@ -1,7 +1,8 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../Context';
+import { SERVERURL } from '../../utils/api';
+import { serverCallHandler } from '../../utils/serverCallFunction';
 import './LogInPage.css';
 
 function LogInPage() {
@@ -21,18 +22,19 @@ function LogInPage() {
 	});
 
 	async function serverAuth() {
-		try {
-			let { data } = await axios.post(
-				'https://Sparrow-Media-Authentication.prakhar10v.repl.co/login',
-				localInput
-			);
+		const { response } = await serverCallHandler('POST', `${SERVERURL}/login`, {
+			email: localInput.email,
+			password: localInput.password,
+		});
+		if (response.success) {
 			setErrorMessage('');
 			setLoading(false);
-			authDispatch({ type: 'CHECK_LOGIN_DETAILS', payload: data });
-		} catch (e) {
-			console.log(e);
-			setLoading(false);
-			setErrorMessage('Invalid Username or Password');
+			authDispatch({
+				type: 'SAVE_LOGIN_DETAILS',
+				payload: { user: response.data, token: response.token },
+			});
+		} else {
+			setErrorMessage(response.message);
 		}
 	}
 

@@ -9,7 +9,7 @@ export function AuthProvider({ children }) {
 	useEffect(() => {
 		const memory = JSON.parse(localStorage.getItem('Login'));
 		if (memory?.isUserLoggedIn === true) {
-			authDispatch({ type: 'LOGIN_ON_STARTUP', payload: memory });
+			authDispatch({ type: 'LOGIN_BY_LOCAL_STORAGE', payload: { user: memory } });
 		}
 	}, [authDispatch]);
 

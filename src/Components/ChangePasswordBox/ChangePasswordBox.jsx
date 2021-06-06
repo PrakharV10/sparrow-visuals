@@ -8,6 +8,7 @@ function ChangePasswordBox({ currentState, setCurrentState }) {
 		authState: { authToken },
 	} = useAuth();
 	const [message, setMessage] = useState('');
+	const [localLoading, setLocalLoading] = useState(false);
 
 	async function serverPostPassword() {
 		const { response } = await serverCallWithAuthorizationHeaders(
@@ -19,10 +20,10 @@ function ChangePasswordBox({ currentState, setCurrentState }) {
 				newPassword: currentState.newPassword,
 			}
 		);
-		console.log(response);
 		if (response.success) {
 			setMessage(true);
 			setCurrentState({
+				...currentState,
 				oldPassword: '',
 				newPassword: '',
 				confirmPassword: '',
@@ -30,10 +31,12 @@ function ChangePasswordBox({ currentState, setCurrentState }) {
 		} else {
 			setMessage(false);
 		}
+		setLocalLoading(false);
 	}
 
 	function submitHandler(e) {
 		e.preventDefault();
+		setLocalLoading(true);
 		if (currentState.newPassword === currentState.confirmPassword) {
 			serverPostPassword();
 		} else {
@@ -104,7 +107,7 @@ function ChangePasswordBox({ currentState, setCurrentState }) {
 				</div>
 			</div>
 			<button type="submit" className="btn btn-outline-pink">
-				CHANGE
+				{localLoading ? `CHANGING` : `CHANGE`}
 			</button>
 		</form>
 	);

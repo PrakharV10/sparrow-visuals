@@ -1,6 +1,6 @@
 const SAVE_SIGNUP_DETAILS = 'SAVE_SIGNUP_DETAILS';
-const CHECK_LOGIN_DETAILS = 'CHECK_LOGIN_DETAILS';
-const LOGIN_ON_STARTUP = 'LOGIN_ON_STARTUP';
+const SAVE_LOGIN_DETAILS = 'SAVE_LOGIN_DETAILS';
+const LOGIN_BY_LOCAL_STORAGE = 'LOGIN_BY_LOCAL_STORAGE';
 const LOG_OUT_HANDLER = 'LOG_OUT_HANDLER';
 const SAVE_USER_DETAILS_FROM_SERVER = 'SAVE_USER_DETAILS_FROM_SERVER';
 const CHANGE_USERNAME_AND_EMAIL = 'CHANGE_USERNAME_AND_EMAIL';
@@ -13,19 +13,37 @@ export function authDispatchFunction(state, { type, payload }) {
 		case SAVE_SIGNUP_DETAILS:
 			localStorage.setItem(
 				'Login',
-				JSON.stringify({ isUserLoggedIn: true, userId: payload.userId })
+				JSON.stringify({ isUserLoggedIn: true, token: payload.token })
 			);
-			return { ...state, isUserLoggedIn: true, currentUserId: payload.userId };
+			return {
+				...state,
+				isUserLoggedIn: true,
+				authToken: payload.token,
+				username: payload.user.username,
+				email: payload.user.email,
+			};
 
-		case CHECK_LOGIN_DETAILS:
+		case SAVE_LOGIN_DETAILS:
 			localStorage.setItem(
 				'Login',
-				JSON.stringify({ isUserLoggedIn: true, userId: payload.userId })
+				JSON.stringify({ isUserLoggedIn: true, token: payload.token })
 			);
-			return { ...state, isUserLoggedIn: true, currentUserId: payload.userId };
+			return {
+				...state,
+				isUserLoggedIn: true,
+				authToken: payload.token,
+				username: payload.username,
+				email: payload.email,
+			};
 
-		case LOGIN_ON_STARTUP:
-			return { ...state, isUserLoggedIn: true, authToken: payload.userId };
+		case LOGIN_BY_LOCAL_STORAGE:
+			return {
+				...state,
+				isUserLoggedIn: true,
+				authToken: payload.user.token,
+				username: payload.user.username,
+				email: payload.user.email,
+			};
 
 		case LOG_OUT_HANDLER:
 			localStorage.removeItem('Login');
@@ -33,6 +51,8 @@ export function authDispatchFunction(state, { type, payload }) {
 				...state,
 				currentUserId: null,
 				isUserLoggedIn: false,
+				username: '',
+				email: '',
 			};
 
 		case CHANGE_USERNAME_AND_EMAIL:
