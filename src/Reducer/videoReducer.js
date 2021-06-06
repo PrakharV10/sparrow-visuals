@@ -1,4 +1,4 @@
-import { searchMyNotes } from '../utils/funcs';
+import { searchMyNotes } from '../utils/util';
 
 const SAVE_LIKED_VIDEOS_FROM_SERVER = 'SAVE_LIKED_VIDEOS_FROM_SERVER';
 const SAVE_PLAYLIST_FROM_SERVER = 'SAVE_PLAYLIST_FROM_SERVER';
@@ -33,7 +33,7 @@ export function videoDispatchFunction(state, { type, payload }) {
 		case REMOVE_FROM_LIKES:
 			return {
 				...state,
-				likedVideo: state.likedVideo.filter((item) => item.id !== payload.id),
+				likedVideo: state.likedVideo.filter((item) => item.id !== payload._id),
 			};
 
 		case ADD_NOTE:
@@ -41,7 +41,7 @@ export function videoDispatchFunction(state, { type, payload }) {
 				return {
 					...state,
 					myNotes: state.myNotes.map((one) => {
-						if (one.id === payload.id)
+						if (one.id === payload._id)
 							return { ...one, notes: [...one.notes, payload.input] };
 						return one;
 					}),
@@ -49,7 +49,7 @@ export function videoDispatchFunction(state, { type, payload }) {
 			} else {
 				return {
 					...state,
-					myNotes: [...state.myNotes, { id: payload.id, notes: [payload.input] }],
+					myNotes: [...state.myNotes, { id: payload._id, notes: [payload.input] }],
 				};
 			}
 
@@ -60,8 +60,8 @@ export function videoDispatchFunction(state, { type, payload }) {
 			return {
 				...state,
 				playlists: state.playlists.map((onePlaylist) => {
-					if (onePlaylist.name === payload.name) {
-						return { ...onePlaylist, id: [...onePlaylist.id, payload.id] };
+					if (onePlaylist._id === payload.playlistId) {
+						return { ...onePlaylist, videos: [...onePlaylist.videos, payload.video] };
 					} else {
 						return onePlaylist;
 					}
@@ -72,10 +72,12 @@ export function videoDispatchFunction(state, { type, payload }) {
 			return {
 				...state,
 				playlists: state.playlists.map((onePlaylist) => {
-					if (onePlaylist.name === payload.name) {
+					if (onePlaylist._id === payload.playlistId) {
 						return {
 							...onePlaylist,
-							id: onePlaylist.id.filter((item) => item !== payload.id),
+							videos: onePlaylist.videos.filter(
+								(item) => item._id !== payload.video._id
+							),
 						};
 					} else {
 						return onePlaylist;

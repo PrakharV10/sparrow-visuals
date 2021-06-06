@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
-import { useVideo } from '../../Context/VideoContext';
-import { searchPlaylistsForID } from '../../utils/funcs';
+import { useAuth, useVideo } from '../../Context';
+import { SERVERURL } from '../../utils/api';
+import { serverCallWithAuthorizationHeaders } from '../../utils/serverCallFunction';
+import { isCurrentVideoInPlaylist } from '../../utils/util';
 import Toast from '../Toast/Toast';
 import './PlaylistModal.css';
 
-function PlaylistModal({ course, showModal, setShowModal }) {
+function PlaylistModal({ currentVideo, showModal, setShowModal }) {
 	const [modalInput, setModalInput] = useState('');
 	const [toast, setToast] = useState(false);
 	const { videoState, videoDispatch } = useVideo();
+	const { authState } = useAuth();
 
 	function addPlaylist(e) {
 		e.preventDefault();
@@ -16,18 +19,43 @@ function PlaylistModal({ course, showModal, setShowModal }) {
 		setModalInput('');
 	}
 
-	function checkBoxHandler(item) {
-		if (searchPlaylistsForID(item.id, course.id) === true) {
+	async function serverDeleteFromPlaylist(item) {
+		let { response } = await serverCallWithAuthorizationHeaders(
+			'DELETE',
+			`${SERVERURL}/playlist/${item._id}`,
+			authState.authToken,
+			{
+				videoId: currentVideo._id,
+			}
+		);
+		if (response.success) {
 			videoDispatch({
 				type: 'REMOVE_FROM_PLAYLIST',
-				payload: { name: item.name, id: course.id },
+				payload: { playlistId: item._id, video: currentVideo },
 			});
 			setToast({ action: 'Remov', show: true });
 			setTimeout(() => {
 				setToast({ action: 'Remov', show: false });
 			}, 2000);
 		} else {
-			videoDispatch({ type: 'ADD_TO_PLAYLIST', payload: { name: item.name, id: course.id } });
+			alert('Operation failed. Please Try again.');
+		}
+	}
+
+	async function serverAddToPlaylist(item) {
+		let { response } = await serverCallWithAuthorizationHeaders(
+			'POST',
+			`${SERVERURL}/playlist/${item._id}`,
+			authState.authToken,
+			{
+				videoId: currentVideo._id,
+			}
+		);
+		if (response.success) {
+			videoDispatch({
+				type: 'ADD_TO_PLAYLIST',
+				payload: { playlistId: item._id, video: currentVideo },
+			});
 			setToast({ action: 'Add', show: true });
 			setTimeout(() => {
 				setToast({ action: 'Add', show: false });
@@ -35,7 +63,13 @@ function PlaylistModal({ course, showModal, setShowModal }) {
 		}
 	}
 
-	console.log(videoState.playlists);
+	function checkBoxHandler(item) {
+		if (isCurrentVideoInPlaylist(item, currentVideo._id) === true) {
+			serverDeleteFromPlaylist(item);
+		} else {
+			serverAddToPlaylist(item);
+		}
+	}
 
 	return (
 		<div
@@ -72,9 +106,9 @@ function PlaylistModal({ course, showModal, setShowModal }) {
 										type="checkbox"
 										name="checkbox"
 										id={`checkBox${index}`}
-										checked={searchPlaylistsForID(item.id, course.id)}
+										checked={isCurrentVideoInPlaylist(item, currentVideo._id)}
 									/>
-									{item.name}
+									{item.playlistName}
 								</label>
 							</div>
 						);

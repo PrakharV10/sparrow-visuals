@@ -18,14 +18,14 @@ export async function serverCallHandler(method, route, data) {
 			}
 		case 'PUT':
 			try {
-				const res = await axios.post(route, data);
+				const res = await axios.put(route, data);
 				return { response: res.data, success: true };
 			} catch (err) {
 				return { response: err.message, success: false };
 			}
 		case 'DELETE':
 			try {
-				const res = await axios.post(route, data);
+				const res = await axios.delete(route, data);
 				return { response: res.data, success: true };
 			} catch (err) {
 				return { response: err.message, success: false };
@@ -43,6 +43,29 @@ export async function serverCallWithAuthorizationHeaders(method, route, token, d
 					headers: {
 						Authorization: token,
 					},
+				});
+				return { response: res.data, success: true };
+			} catch (err) {
+				return { response: err.message, success: false };
+			}
+		case 'POST':
+			try {
+				const res = await axios.post(route, data, {
+					headers: {
+						Authorization: token,
+					},
+				});
+				return { response: res.data, success: true };
+			} catch (err) {
+				return { response: err.message, success: false };
+			}
+		case 'DELETE':
+			try {
+				const res = await axios.delete(route, {
+					headers: {
+						Authorization: token,
+					},
+					data,
 				});
 				return { response: res.data, success: true };
 			} catch (err) {
