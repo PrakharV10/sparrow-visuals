@@ -2,9 +2,14 @@ const SAVE_SIGNUP_DETAILS = 'SAVE_SIGNUP_DETAILS';
 const CHECK_LOGIN_DETAILS = 'CHECK_LOGIN_DETAILS';
 const LOGIN_ON_STARTUP = 'LOGIN_ON_STARTUP';
 const LOG_OUT_HANDLER = 'LOG_OUT_HANDLER';
+const SAVE_USER_DETAILS_FROM_SERVER = 'SAVE_USER_DETAILS_FROM_SERVER';
+const CHANGE_USERNAME_AND_EMAIL = 'CHANGE_USERNAME_AND_EMAIL';
 
 export function authDispatchFunction(state, { type, payload }) {
 	switch (type) {
+		case SAVE_USER_DETAILS_FROM_SERVER:
+			return { ...state, email: payload.email, username: payload.username };
+
 		case SAVE_SIGNUP_DETAILS:
 			localStorage.setItem(
 				'Login',
@@ -30,13 +35,17 @@ export function authDispatchFunction(state, { type, payload }) {
 				isUserLoggedIn: false,
 			};
 
+		case CHANGE_USERNAME_AND_EMAIL:
+			return { ...state, username: payload.username, email: payload.email };
+
 		default:
 			return state;
 	}
 }
 
 export const initialAuthState = {
-	isUserLoggedIn: true,
-	authToken:
-		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGI1ZWQ4ZDA0YWM0NDAyZTAzMmUzMDUiLCJpYXQiOjE2MjI1MzU1NjV9.1Vj2ty4NFDnJ8b3z9X6uID28Ao-SeXmr3P3zBY9BrqA',
+	isUserLoggedIn: false,
+	authToken: '',
+	username: '',
+	email: '',
 };

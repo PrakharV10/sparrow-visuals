@@ -1,33 +1,45 @@
-import axios from 'axios';
 import React, { useState } from 'react';
 import { useAuth } from '../../Context';
+import { SERVERURL } from '../../utils/api';
+import { serverCallWithAuthorizationHeaders } from '../../utils/serverCallFunction';
 
 function ProfileDetailBox({ currentState, setCurrentState }) {
 	const {
-		authState: { currentUserId },
+		authState: { authToken },
+		authDispatch,
 	} = useAuth();
 	const [message, setMessage] = useState();
+	const [localLoading, setLocalLoading] = useState(false);
 
-	async function serverChangeUsername() {
-		let data = await axios.post(
-			`https://Sparrow-Media-Authentication.prakhar10v.repl.co/users/${currentUserId}`,
+	async function serverChangeUsernameAndEmail() {
+		const { response } = await serverCallWithAuthorizationHeaders(
+			'POST',
+			`${SERVERURL}/users`,
+			authToken,
 			{
 				username: currentState.username,
 				email: currentState.email,
-				password: currentState.actualPassword,
 			}
 		);
-		if (data) {
+		if (response.success) {
 			setMessage(true);
+			authDispatch({
+				type: 'CHANGE_USERNAME_AND_EMAIL',
+				payload: { username: currentState.username, email: currentState.email },
+			});
 		} else {
 			setMessage(false);
 		}
+		setLocalLoading(false);
 	}
 
 	function submitHandler(e) {
 		e.preventDefault();
-		if (currentState.username.trim() !== 0 && currentState.email.trim() !== 0) {
-			serverChangeUsername();
+		setLocalLoading(true);
+		if (currentState.username.trim().length !== 0 && currentState.email.trim().length !== 0) {
+			serverChangeUsernameAndEmail();
+		} else {
+			setMessage(false);
 		}
 	}
 
@@ -84,7 +96,7 @@ function ProfileDetailBox({ currentState, setCurrentState }) {
 				</div>
 			</div>
 			<button type="submit" className="btn btn-outline-pink">
-				SAVE
+				{localLoading ? `SAVING` : `SAVE`}
 			</button>
 		</form>
 	);

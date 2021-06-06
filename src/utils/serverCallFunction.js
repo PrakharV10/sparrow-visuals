@@ -59,6 +59,17 @@ export async function serverCallWithAuthorizationHeaders(method, route, token, d
 			} catch (err) {
 				return { response: err.message, success: false };
 			}
+		case 'PUT':
+			try {
+				const res = await axios.put(route, data, {
+					headers: {
+						Authorization: token,
+					},
+				});
+				return { response: res.data, success: true };
+			} catch (err) {
+				return { response: err.message, success: false };
+			}
 		case 'DELETE':
 			try {
 				const res = await axios.delete(route, {

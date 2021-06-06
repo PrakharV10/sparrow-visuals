@@ -1,23 +1,26 @@
-import axios from 'axios';
 import React, { useState } from 'react';
 import { useAuth } from '../../Context';
+import { SERVERURL } from '../../utils/api';
+import { serverCallWithAuthorizationHeaders } from '../../utils/serverCallFunction';
 
 function ChangePasswordBox({ currentState, setCurrentState }) {
 	const {
-		authState: { currentUserId },
+		authState: { authToken },
 	} = useAuth();
 	const [message, setMessage] = useState('');
 
 	async function serverPostPassword() {
-		const data = await axios.post(
-			`https://Sparrow-Media-Authentication.prakhar10v.repl.co/users/${currentUserId}`,
+		const { response } = await serverCallWithAuthorizationHeaders(
+			'PUT',
+			`${SERVERURL}/users`,
+			authToken,
 			{
-				username: currentState.username,
-				email: currentState.email,
-				password: currentState.newPassword,
+				oldPassword: currentState.oldPassword,
+				newPassword: currentState.newPassword,
 			}
 		);
-		if (data) {
+		console.log(response);
+		if (response.success) {
 			setMessage(true);
 			setCurrentState({
 				oldPassword: '',
@@ -31,10 +34,7 @@ function ChangePasswordBox({ currentState, setCurrentState }) {
 
 	function submitHandler(e) {
 		e.preventDefault();
-		if (
-			currentState.oldPassword === currentState.actualPassword &&
-			currentState.newPassword === currentState.confirmPassword
-		) {
+		if (currentState.newPassword === currentState.confirmPassword) {
 			serverPostPassword();
 		} else {
 			setMessage(false);

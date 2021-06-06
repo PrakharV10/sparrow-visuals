@@ -8,7 +8,7 @@ const VideoContext = createContext();
 
 export function VideoProvider({ children }) {
 	const [videoState, videoDispatch] = useReducer(videoDispatchFunction, initialState);
-	const { authState } = useAuth();
+	const { authState, authDispatch } = useAuth();
 	const { setIsLoading } = useLoading();
 
 	// getting all the videos from server
@@ -30,7 +30,12 @@ export function VideoProvider({ children }) {
 			`${SERVERURL}/users`,
 			authState.authToken
 		);
-		console.log('User detials : ', response);
+		if (response.success) {
+			authDispatch({
+				type: 'SAVE_USER_DETAILS_FROM_SERVER',
+				payload: { username: response.data.username, email: response.data.email },
+			});
+		}
 	};
 
 	const getUserAssosiatedNotes = async () => {
