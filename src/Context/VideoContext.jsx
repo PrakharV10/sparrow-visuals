@@ -21,6 +21,7 @@ export function VideoProvider({ children }) {
 					payload: { videoData: response.data },
 				});
 			}
+			if (!authState.isUserLoggedIn) setIsLoading(false);
 		})();
 	}, []);
 
