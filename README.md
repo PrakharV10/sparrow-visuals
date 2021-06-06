@@ -8,12 +8,21 @@ Dove also provides users the best experience, as they can Sign In on the Website
 ## Live Link - 
 [Dove](https://sparrow-visuals.netlify.app)
 
+## Test Credentials -
+- email : johndoe@gmail.com
+- password : 123456
+
+Or you can signup and create a new ID.
+
 ## Technologies Used - 
 1) HTML, CSS & React Js
-2) React Router
-3) Repl.it for API server.
-4) NodeJs, ExpressJS for backend.
-5) Netlify for hosting the static server.
+2) sparrow designs component library
+3) React Router
+4) Repl.it for API server.
+5) NodeJs, ExpressJS for backend.
+6) JWT for authorization
+7) bcrypt for Password hashing. 
+8) Netlify for hosting the static server.
 
 ## Screenshots - 
 ![3](https://user-images.githubusercontent.com/70899048/114407498-14385c80-9bc6-11eb-9948-5a47cf6dc28c.JPG)
