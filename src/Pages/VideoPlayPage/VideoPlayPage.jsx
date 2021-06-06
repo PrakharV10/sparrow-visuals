@@ -6,6 +6,8 @@ import LoginModal from '../../Components/LoginModal/LoginModal';
 import NoteComponent from '../../Components/NoteComponent/NoteComponent';
 import PlaylistModal from '../../Components/PlaylistModal/PlaylistModal';
 import { useAuth, useLoading, useVideo } from '../../Context';
+import { SERVERURL } from '../../utils/api';
+import { serverCallWithAuthorizationHeaders } from '../../utils/serverCallFunction';
 import { searchLikes } from '../../utils/util';
 
 import './VideoPlayPage.css';
@@ -17,18 +19,48 @@ function VideoPlayPage() {
 	const [showModal, setShowModal] = useState(false);
 	const [loginModal, setLoginModal] = useState(false);
 	const {
-		authState: { isUserLoggedIn },
+		authState: { isUserLoggedIn, authToken },
 	} = useAuth();
 
 	// Get the Current Video Object
 	const currentVideo = videoState.videoData.find((one) => one._id === videoID);
 
+	async function serverAddToLikedVideo() {
+		const { response } = await serverCallWithAuthorizationHeaders(
+			'POST',
+			`${SERVERURL}/liked`,
+			authToken,
+			{
+				videoId: currentVideo._id,
+			}
+		);
+		if (response.success) {
+			videoDispatch({ type: 'ADD_TO_LIKES', payload: { video: currentVideo } });
+		} else {
+			alert('ERROR OCCURED. Please Try Again!');
+		}
+	}
+
+	async function serverDeleteFromLikedVideo() {
+		const { response } = await serverCallWithAuthorizationHeaders(
+			'DELETE',
+			`${SERVERURL}/liked`,
+			authToken,
+			{
+				videoId: currentVideo._id,
+			}
+		);
+		if (response.success) {
+			videoDispatch({ type: 'REMOVE_FROM_LIKES', payload: currentVideo });
+		}
+	}
+
 	function handleLikes() {
 		if (isUserLoggedIn) {
-			if (searchLikes(videoState, currentVideo) === false) {
-				videoDispatch({ type: 'ADD_TO_LIKES', payload: currentVideo });
+			if (searchLikes(videoState.likedVideo, currentVideo) === false) {
+				serverAddToLikedVideo();
 			} else {
-				videoDispatch({ type: 'REMOVE_FROM_LIKES', payload: currentVideo });
+				serverDeleteFromLikedVideo();
 			}
 		} else {
 			setLoginModal(true);
@@ -63,12 +95,15 @@ function VideoPlayPage() {
 									<button
 										onClick={handleLikes}
 										className={
-											searchLikes(videoState, currentVideo) === true
+											searchLikes(videoState.likedVideo, currentVideo) ===
+											true
 												? 'btn btn-trans clicked'
 												: 'btn btn-trans'
 										}
 									>
-										{searchLikes(videoState, currentVideo) ? 'LIKED' : 'LIKE'}
+										{searchLikes(videoState.likedVideo, currentVideo)
+											? 'LIKED'
+											: 'LIKE'}
 									</button>
 									<button
 										onClick={handlePlaylistButton}
@@ -97,7 +132,7 @@ function VideoPlayPage() {
 					</div>
 
 					<div className="right-flex">
-						{/* <NoteComponent currentVideo={currentVideo} /> */}
+						<NoteComponent currentVideo={currentVideo} />
 					</div>
 				</>
 			)}

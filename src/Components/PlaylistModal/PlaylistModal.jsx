@@ -12,15 +12,29 @@ function PlaylistModal({ currentVideo, showModal, setShowModal }) {
 	const { videoState, videoDispatch } = useVideo();
 	const { authState } = useAuth();
 
+	async function serverCreateNewPlaylist() {
+		const { response } = await serverCallWithAuthorizationHeaders(
+			'POST',
+			`${SERVERURL}/playlist`,
+			authState.authToken,
+			{
+				playlistName: modalInput,
+			}
+		);
+		if (response.success) {
+			videoDispatch({ type: 'CREATE_NEW_PLAYLIST', payload: { newPlaylist: response.data } });
+			setModalInput('');
+		}
+	}
+
 	function addPlaylist(e) {
 		e.preventDefault();
 		if (modalInput.trim().length === 0) return;
-		videoDispatch({ type: 'ADD_NEW_PLAYLIST', payload: modalInput });
-		setModalInput('');
+		serverCreateNewPlaylist();
 	}
 
 	async function serverDeleteFromPlaylist(item) {
-		let { response } = await serverCallWithAuthorizationHeaders(
+		const { response } = await serverCallWithAuthorizationHeaders(
 			'DELETE',
 			`${SERVERURL}/playlist/${item._id}`,
 			authState.authToken,
@@ -43,7 +57,7 @@ function PlaylistModal({ currentVideo, showModal, setShowModal }) {
 	}
 
 	async function serverAddToPlaylist(item) {
-		let { response } = await serverCallWithAuthorizationHeaders(
+		const { response } = await serverCallWithAuthorizationHeaders(
 			'POST',
 			`${SERVERURL}/playlist/${item._id}`,
 			authState.authToken,

@@ -1,13 +1,13 @@
-export function searchLikes(state, course) {
-	if (state.likedVideo.filter((item) => item.id === course.id).length === 0) {
-		return false;
-	} else {
+export function searchLikes(likedVideo, currentVideo) {
+	if (likedVideo.find((item) => item._id === currentVideo._id)) {
 		return true;
+	} else {
+		return false;
 	}
 }
 
-export function searchMyNotes(state, payload) {
-	if (state.myNotes.find((item) => item.id === payload.id)) {
+export function searchMyNotes(myNotes, payload) {
+	if (myNotes.find((item) => item.videoId === payload.videoId)) {
 		return true;
 	} else {
 		return false;
@@ -23,7 +23,6 @@ export function searchPlaylistsForPlaylist(state, playlistName) {
 }
 
 export function isCurrentVideoInPlaylist(item, videoID) {
-	console.log('Item : ', item);
 	if (item.videos.find((oneId) => oneId._id === videoID)) return true;
 	return false;
 }

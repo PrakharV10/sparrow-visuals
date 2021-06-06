@@ -1,26 +1,15 @@
-import React from 'react'
+import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { data } from '../../Data/Data'
-
-
-function PlaylistCard({ current }) {
-
-    const currVid = data.find(item => item.id === current)
-    
-    return (
-        <div>
-            <Link
-            to = {`/watch/${currVid.id}`}
-            key={currVid.id}
-            className="cards">
-                <img className="card-image" src={currVid.thumbnail} alt="card-pic" />
-                <div className="card-title">
-                    {currVid.title}
-                </div>
-            </Link>
-        </div>
-    )
+function PlaylistCard({ currentVideo }) {
+	return (
+		<div>
+			<Link to={`/watch/${currentVideo._id}`} key={currentVideo._id} className="cards">
+				<img className="card-image" src={currentVideo.thumbnail} alt="card-pic" />
+				<div className="card-title">{currentVideo.title}</div>
+			</Link>
+		</div>
+	);
 }
 
-export default PlaylistCard
+export default PlaylistCard;
