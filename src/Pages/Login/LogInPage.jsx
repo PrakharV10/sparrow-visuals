@@ -35,6 +35,7 @@ function LogInPage() {
 			});
 		} else {
 			setErrorMessage(response.message);
+			setLoading(false);
 		}
 	}
 
@@ -73,6 +74,7 @@ function LogInPage() {
 						placeholder='Email'
 						type='text'
 						name='username'
+						required
 					/>
 					<input
 						onChange={(e) => setLocalInput({ ...localInput, password: e.target.value })}
@@ -80,6 +82,7 @@ function LogInPage() {
 						placeholder='Password'
 						type='password'
 						name='password'
+						required
 					/>
 
 					<button type='submit' className='btn btn-outline-pink'>

@@ -3,11 +3,12 @@ import { useNavigate } from 'react-router';
 import ChangePasswordBox from '../../Components/ChangePasswordBox/ChangePasswordBox';
 import Loader from '../../Components/LoaderSpinner/Loader';
 import ProfileDetailBox from '../../Components/ProfileDetailBox/ProfileDetailBox';
-import { useAuth, useLoading } from '../../Context';
+import { useAuth, useLoading, useVideo } from '../../Context';
 import './AccountPage.css';
 
 function AccountPage() {
 	const { authState, authDispatch } = useAuth();
+	const { videoDispatch } = useVideo();
 	const navigate = useNavigate();
 	const { isLoading } = useLoading();
 
@@ -26,21 +27,22 @@ function AccountPage() {
 
 	function logOutHandler() {
 		authDispatch({ type: 'LOG_OUT_HANDLER' });
+		videoDispatch({ type: 'RESET_VIDEO_STATE' });
 		navigate('/');
 	}
 
 	return (
-		<div className="account-page">
+		<div className='account-page'>
 			{!isLoading && (
 				<>
-					<div className="bread-crumb">
-						<div className="route-title">My Account</div>
-						<button onClick={logOutHandler} className="btn btn-invert">
+					<div className='bread-crumb'>
+						<div className='route-title'>My Account</div>
+						<button onClick={logOutHandler} className='btn btn-invert'>
 							LOG OUT
 						</button>
 					</div>
-					<div className="divider"></div>
-					<div className="account-settings wrapper">
+					<div className='divider'></div>
+					<div className='account-settings wrapper'>
 						<ProfileDetailBox
 							currentState={currentState}
 							setCurrentState={setCurrentState}

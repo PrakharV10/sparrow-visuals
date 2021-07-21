@@ -11,6 +11,7 @@ const ADD_TO_PLAYLIST = 'ADD_TO_PLAYLIST';
 const REMOVE_FROM_PLAYLIST = 'REMOVE_FROM_PLAYLIST';
 const DELETE_PLAYLIST = 'DELETE_PLAYLIST';
 const SEARCH_FILTER = 'SEARCH_FILTER';
+const RESET_VIDEO_STATE = 'RESET_VIDEO_STATE';
 
 export function videoDispatchFunction(state, { type, payload }) {
 	switch (type) {
@@ -92,6 +93,9 @@ export function videoDispatchFunction(state, { type, payload }) {
 
 		case SEARCH_FILTER:
 			return { ...state, searchValue: payload };
+
+		case RESET_VIDEO_STATE:
+			return { ...state, likedVideo: [], myNotes: [], playlists: [] };
 
 		default:
 			return state;

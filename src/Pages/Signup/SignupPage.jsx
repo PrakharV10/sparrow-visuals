@@ -51,23 +51,27 @@ function SignupPage() {
 
 	function submitHandler(e) {
 		e.preventDefault();
-		setLoading(true);
-		serverCheckAndSave();
+		if (localInput.username.length < 4) {
+			setErrorMessage('Username requires atleast 4 characters.');
+		} else {
+			setLoading(true);
+			serverCheckAndSave();
+		}
 	}
 
 	return (
-		<div className="signup-bg image-overlay">
-			<div className="mid-container">
-				<div className="title">
+		<div className='signup-bg image-overlay'>
+			<div className='mid-container'>
+				<div className='title'>
 					SIGN <span>UP</span>
 				</div>
-				<form onSubmit={(e) => submitHandler(e)} className="user-field">
+				<form onSubmit={(e) => submitHandler(e)} className='user-field'>
 					{errorMessage && (
-						<div className="alert error">
-							<svg width="1em" height="1em" viewBox="0 0 24 24">
+						<div className='alert error'>
+							<svg width='1em' height='1em' viewBox='0 0 24 24'>
 								<path
-									d="M13 13h-2V7h2m0 10h-2v-2h2M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10a10 10 0 0 0 10-10A10 10 0 0 0 12 2z"
-									fill="currentColor"
+									d='M13 13h-2V7h2m0 10h-2v-2h2M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10a10 10 0 0 0 10-10A10 10 0 0 0 12 2z'
+									fill='currentColor'
 								></path>
 							</svg>
 							{errorMessage}
@@ -82,9 +86,9 @@ function SignupPage() {
 							}))
 						}
 						value={localInput.username}
-						placeholder="Username"
-						type="text"
-						name="Username"
+						placeholder='Username'
+						type='text'
+						name='Username'
 						required
 					/>
 
@@ -96,29 +100,29 @@ function SignupPage() {
 							}))
 						}
 						value={localInput.email}
-						placeholder="Email"
-						type="email"
-						name="email"
+						placeholder='Email'
+						type='email'
+						name='email'
 						required
 					/>
 
 					<input
 						onChange={(e) => passwordChecker(e)}
 						value={localInput.password}
-						placeholder="Password"
-						type="password"
-						name="password"
+						placeholder='Password'
+						type='password'
+						name='password'
 						required
 					/>
 
-					<button type="submit" className="btn btn-outline-pink">
-						{loading ? `SIGNING IN...` : `SIGN IN`}
+					<button type='submit' className='btn btn-outline-pink'>
+						{loading ? `SIGNING UP...` : `SIGN UP`}
 					</button>
 				</form>
-				<div className="sub-text">
+				<div className='sub-text'>
 					Already Have an Account?
-					<Link to="/login">
-						<span className="text-pink"> Sign in!</span>
+					<Link to='/login'>
+						<span className='text-pink'> Sign in!</span>
 					</Link>
 				</div>
 			</div>
