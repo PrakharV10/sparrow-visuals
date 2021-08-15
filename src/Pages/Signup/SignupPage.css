@@ -1,0 +1,20 @@
+.signup-bg{
+    width: 100%;
+    height: calc(100vh - 88px);
+    border-top: 5px solid var(--pink-800);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.signup-bg.image-overlay{
+    background-image: url('https://images.pexels.com/photos/326501/pexels-photo-326501.jpeg?cs=srgb&dl=pexels-tranmautritam-326501.jpg&fm=jpg'),  linear-gradient(rgba(0, 0, 0, 0.795),rgba(0, 0, 0, 0.842));
+}
+
+.error-message{
+    margin: .2rem;
+    font-size: .8rem;
+    text-align: left;
+    font-weight: 300;
+    color: rgb(250, 62, 62);
+}

@@ -1,0 +1,42 @@
+.modal.login{
+    min-height: 160px;
+    max-width: 400px;
+    border-radius: 0;
+    background-color: #28282df5; 
+    width: 95%;  
+}
+
+.modal-text{
+    padding: 1.5rem;
+    padding-bottom: 1rem;
+    font-size: 1rem;
+}
+
+.modal-subtext{
+    padding: 0 1.5rem 1.5rem;
+    font-size: .9rem;
+    color: var(--gray-300);
+    border-bottom: 1px solid rgba(172, 170, 170, 0.178);
+}
+
+.bottom-button{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.login-link{
+    margin: 1rem 1.5rem;
+    color: var(--pink-800);
+    cursor: pointer;
+    width: fit-content;
+    display: inline-block;
+}
+
+.cancel-btn{
+    margin: 1rem 1.5rem;
+    cursor: pointer;
+    width: fit-content;
+    display: inline-block;
+    color: var(--gray-300);
+}

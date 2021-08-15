@@ -1,0 +1,102 @@
+.account-settings{
+    display: flex;
+    justify-content: space-between;
+}
+
+.account-page .btn-invert{
+    margin: 0;
+}
+
+.account-page .btn-outline-pink{
+    width: 30px;
+    padding: .7rem .5rem;
+    margin: 0;
+}
+
+.profile-container{
+    padding: 1.5rem;
+    color: var(--white-100);
+    background-color: var(--gray-900);
+    height: max-content;
+    font-family: 'Ubuntu', sans-serif;
+    box-shadow: 0 0 20px 0 rgb(0 0 0 / 30%);
+    width: 600px;
+}
+
+.profile-container .head{
+    padding-bottom: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.profile-container .head svg{
+    height: 20px;
+    width: 20px;
+}
+
+
+.btn-invert{
+    background-color: var(--white-100);
+    color : #DB2777;
+}
+
+.inp-group{
+    width: 100%;
+    margin: 0 1rem 0 0;
+}
+
+.inp-group label{
+    font-size: 1rem;
+    color: var(--gray-300);
+    padding: .5rem 0;
+}
+
+.inp-group input{
+    background-color: var(--gray-800);
+    border: 0;
+    padding: 1rem;
+    color: var(--white-100);
+    font-size: .9rem;
+    width: 100%;
+}
+
+.upper-flex{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+
+@media screen and (max-width : 1420px){
+    .profile-container{
+        width: 40vw;
+    }
+}
+
+@media screen and (max-width : 1024px){
+    .account-settings{
+        flex-direction: column;
+    }
+
+    .profile-container{
+        width: 600px;
+        margin: 0 auto 2rem;
+    }
+}
+
+@media screen and (max-width : 700px){
+    .upper-flex{
+        flex-direction: column;
+        margin-bottom: 0;
+    }
+
+    .inp-group{
+        margin : .5rem 0;
+    }
+
+
+    .profile-container{
+        margin: 0 auto 2rem;
+        width: 100%;
+    }
+}
